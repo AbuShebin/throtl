@@ -18,7 +18,7 @@ class DashboardRepository {
     try{
       print("outgoind requrest to add bike");
       final result =await dio.post(
-      "http://192.168.1.43:3000/throtl/addBike",
+      "http://192.168.1.42:3000/throtl/addBike",
       data: {"bikeName": "Yamaha Fz16", "model": "version 1", "year": 2016},
     );
 print("reuslt is ${result.data}");
@@ -37,7 +37,7 @@ print("reuslt is ${result.data}");
   FutureEither<List<GetAllBikesModel>> getAllBikesModel()async{
     try{
       print("get asll bike  request");
-    final result = await dio.get("http://192.168.1.43:3000/vehicle/getAllBikes");
+    final result = await dio.get("http://192.168.1.42:3000/vehicle/getAllBikes");
 
     if(result.statusCode == 200) {
       print("result is ${result.data}${result.statusCode}");

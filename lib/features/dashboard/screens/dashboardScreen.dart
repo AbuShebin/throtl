@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +11,7 @@ import 'package:throtl/core/utils/themes/fontSyle.dart';
 import 'package:throtl/core/utils/themes/pallete.dart';
 import 'package:throtl/features/dashboard/controller/dashboard_controller.dart';
 import 'package:throtl/features/dashboard/dashboardProviders/dashboardProviders.dart';
+import 'package:throtl/features/dashboard/get_all_bikes_bloc.dart';
 import 'package:throtl/features/dashboard/models/addBikeModel.dart';
 import 'package:throtl/features/maintenace/maintenance_screen.dart';
 
@@ -23,6 +25,13 @@ class DashboardScreen extends ConsumerStatefulWidget {
 }
 
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<GetAllBikesBloc>().add(GetAllBikesInitialEvent());
+
+  }
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -133,19 +142,23 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
             ),
             SizedBox(height: h * 0.01),
-            
-            // Bikes List with Add New Bike Card
             SizedBox(
-              height: h * 0.22,
-              child: Consumer(
-                builder: (context, ref, child) {
-                return  ref.watch(dashBoardProvider).when(
-                  data: (bikeDataList) {
-                    return  ListView.builder(
+                height: h * 0.22,
+
+            child: BlocBuilder<GetAllBikesBloc,GetAllBikesState>(builder: (context, state) {
+                if(state is GetAllBIkesLoading){
+                  return ErrorText(errorText: "something went wrong state is Failure state, will come back stronger");
+                }
+
+
+                         if(state is! GetAllBikesSuccess){
+               return Loader(isLinear: true,);
+                         }
+                return ListView.builder(
                   shrinkWrap: false,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    
+
                     return Padding(
                       padding: EdgeInsets.only(left: w * .01, right: w * 0.01),
                       child: GestureDetector(
@@ -154,17 +167,17 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           width: w * .4,
                           height: h * 0.2,
                           decoration: BoxDecoration(
-                            color: AppColors.cardBackground,
-                            borderRadius: BorderRadius.circular(10)
+                              color: AppColors.cardBackground,
+                              borderRadius: BorderRadius.circular(10)
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(height: h*0.02,),
-                              Text(bikeDataList[index].bikeName,style: AppTextStyles.headline),
+                              Text(state.getAllBikesModel[index].bikeName,style: AppTextStyles.headline),
                               SizedBox(height: h*0.1,),
                               Text("Last serviced on\n 12/02/2025",style: AppTextStyles.iconTextStyle.copyWith(
-                                fontSize: 12
+                                  fontSize: 12
                               )),
                               SizedBox(height: h*0.02,)
                             ],
@@ -173,19 +186,30 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       ),
                     );
                   },
-                  itemCount: bikeDataList.length, // 3 bikes + 1 add new bike card
+                  itemCount: state.getAllBikesModel.length, // 3 bikes + 1 add new bike card
                 );
-             
-                  },
-                loading: () => Loader(
-                  isLinear: true,
-                ),
-                error: (error, stackTrace) => ErrorText(
-                  errorText: error.toString(),
-                ),
-                );
-                }, ),
+              },),
             ),
+            // Bikes List with Add New Bike Card
+
+            // SizedBox(
+            //   height: h * 0.22,
+            //   child: Consumer(
+            //     builder: (context, ref, child) {
+            //     return  ref.watch(dashBoardProvider).when(
+            //       data: (bikeDataList) {
+            //         return ;
+            //
+            //       },
+            //     loading: () => Loader(
+            //       isLinear: true,
+            //     ),
+            //     error: (error, stackTrace) => ErrorText(
+            //       errorText: error.toString(),
+            //     ),
+            //     );
+            //     }, ),
+            // ),
             SizedBox(height: h * 0.01),
             Padding(
               padding: EdgeInsets.only(left: w*0.02, right: w*0.02),
