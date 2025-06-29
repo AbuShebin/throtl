@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:throtl/core/utils/themes/pallete.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:throtl/core/utils/routes/routing.dart';
 import 'package:throtl/core/utils/themes/theme.dart';
-import 'package:throtl/dashboard/screens/dashboardScreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,10 +14,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final router = Routing().router;
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       theme: appTheme,
-       home:  DashboardScreen(),
        debugShowCheckedModeBanner: false,
     );
   }

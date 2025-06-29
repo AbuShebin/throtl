@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:throtl/core/utils/routes/route_constants.dart';
 import 'package:throtl/core/utils/themes/fontSyle.dart';
 import 'package:throtl/core/utils/themes/pallete.dart';
 
 class BikeDetailsScreen extends StatefulWidget {
+  static const routeName = RouteConstants.bikeDetailsRoute;
   const BikeDetailsScreen({super.key});
 
   @override
@@ -72,7 +74,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                       width: w * 0.4,
                       height: w * 0.4,
                       decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.1),
+                        color: Colors.grey.shade400,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Icon(
@@ -107,19 +109,19 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                 children: [
                   Expanded(
                     child: _buildStatCard(
-                      "Total Expenses",
-                      "₹45,000",
-                      Icons.currency_rupee,
-                      Colors.green,
+                     title: "Total Expenses",
+                     value:  "₹45,000",
+                    icon:  Icons.currency_rupee,
+                     color:  Colors.green,
                     ),
                   ),
                   SizedBox(width: w * 0.04),
                   Expanded(
                     child: _buildStatCard(
-                      "Avg Mileage",
-                      "35 km/l",
-                      Icons.local_gas_station,
-                      Colors.blue,
+                     title:  "Avg Mileage",
+value:                       "35 km/l",
+       icon:                Icons.local_gas_station,
+             color:          Colors.blue,
                     ),
                   ),
                 ],
@@ -135,7 +137,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                 width: double.infinity,
                 padding: EdgeInsets.all(w * 0.04),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.cardBackground,
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
@@ -156,11 +158,11 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                       ),
                     ),
                     SizedBox(height: h * 0.015),
-                    _buildServiceInfo("Last Service", "15 Feb 2024", Icons.build),
+                    _buildServiceInfo(title: "Last Service", value: "15 Feb 2024",icon:  Icons.build),
                     SizedBox(height: h * 0.01),
-                    _buildServiceInfo("Next Service", "15 May 2024", Icons.schedule),
+                    _buildServiceInfo(title: "Next Service", value: "15 May 2024",icon:  Icons.schedule),
                     SizedBox(height: h * 0.01),
-                    _buildServiceInfo("Service Due", "2,000 km", Icons.speed),
+                    _buildServiceInfo(title: "Service Due",value: "2,000 km",icon:  Icons.speed),
                   ],
                 ),
               ),
@@ -227,7 +229,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                 width: double.infinity,
                 padding: EdgeInsets.all(w * 0.04),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.cardBackground,
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
@@ -263,14 +265,14 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
     );
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon, Color color) {
+  Widget _buildStatCard({required String title,required  String value,required  IconData icon,required  Color color}) {
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
 
     return Container(
       padding: EdgeInsets.all(w * 0.04),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardBackground,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -293,7 +295,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
             style: GoogleFonts.orbitron().copyWith(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: AppColors.cardHeading,
             ),
           ),
           SizedBox(height: h * 0.005),
@@ -301,7 +303,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
             title,
             style: TextStyle(
               fontSize: 12,
-              color: Colors.grey[600],
+              color: AppColors.cardParagraph,
             ),
             textAlign: TextAlign.center,
           ),
@@ -310,7 +312,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
     );
   }
 
-  Widget _buildServiceInfo(String title, String value, IconData icon) {
+  Widget _buildServiceInfo({required String title,required  String value,required  IconData icon}) {
     return Row(
       children: [
         Icon(
@@ -323,7 +325,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
           title,
           style: TextStyle(
             fontSize: 14,
-            color: Colors.grey[700],
+            color: AppColors.cardParagraph,
           ),
         ),
         Spacer(),
@@ -355,7 +357,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
         width: w * 0.25,
         height: h * 0.12,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.cardBackground,
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(
@@ -387,7 +389,7 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
-                color: Colors.black87,
+                color: AppColors.cardHeading,
               ),
               textAlign: TextAlign.center,
             ),
@@ -427,14 +429,14 @@ class _BikeDetailsScreenState extends State<BikeDetailsScreen> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                    color: AppColors.cardHeading,
                   ),
                 ),
                 Text(
                   date,
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.grey[600],
+                    color: AppColors.cardParagraph,
                   ),
                 ),
               ],
