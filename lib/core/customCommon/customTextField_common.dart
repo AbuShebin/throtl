@@ -51,7 +51,7 @@ class CustomTextField extends StatelessWidget {
       style: TextStyle(
         fontFamily: 'Urbanist',
         fontSize: w * 0.037,
-        color: Colors.black,
+        color: Colors.white,
       ),
       decoration: InputDecoration(
         prefixIcon: icon != null ? Icon(icon) : null,
@@ -59,7 +59,7 @@ class CustomTextField extends StatelessWidget {
         hintStyle: TextStyle(
           fontFamily: 'Urbanist',
           fontSize: w * 0.036,
-          color:Colors.black,
+          color:Colors.white,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(w * 0.03),

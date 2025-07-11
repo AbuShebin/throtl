@@ -12,5 +12,7 @@ class AppColors {
   static const Color iconHighlight = Color(0xFF7F5AF0);
   static const Color iconSecondary = Color(0xFF72757E);
   static const Color iconTertiary = Color(0xFF2CB67D);
+    static  Color buttonColor = Color.fromARGB(255, 101, 32, 166);
+
 }
 

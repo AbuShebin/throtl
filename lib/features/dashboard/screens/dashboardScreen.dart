@@ -238,6 +238,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     icon: Icons.build,
                     label: "Maintenance",
                     onTap: () {
+                      print("maintainace tap");
                       // Maintenance action
                       context.push(MaintenanceScreen.routeName);
                     },
@@ -247,7 +248,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     icon: Icons.analytics,
                     label: "Analytics",
                     onTap: () {
-                      // Analytics action
+                      print("analytics clicked");
+                      context.push(RouteConstants.addRideDetailsRouteName);
                     },
                   ),
                   _buildQuickActionButton(

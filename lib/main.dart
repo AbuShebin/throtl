@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final router = Routing().router;
     return BlocProvider(
       create: (context) => GetAllBikesBloc(),
       child: MaterialApp.router(
